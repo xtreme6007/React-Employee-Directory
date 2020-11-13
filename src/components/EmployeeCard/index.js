@@ -1,22 +1,26 @@
-import React from "react"
+import React from "react";
 
 
-function EmployeeCard({name, image, email, phone}) {
+function EmployeeCard(props) {
 
-return(
-    <div>
+    
 
-<img
-src={image}
-alt="Profile Pic"
 
-/>
-<p>Name: {name}</p>
-<p>Email: {email}</p>
-<p>Phone Number: {phone}</p>
+    return (
+        <div>
 
-    </div>
-)
+            <img
+                src={props.image}
+                alt="Profile Pic"
+
+            />
+            <p>First Name: {props.firstName}</p>
+            <p>Last Name: {props.lastName}</p>
+            <p>Email: {props.email}</p>
+            <p>Phone Number: {props.phone}</p>
+
+        </div>
+    )
 
 
 

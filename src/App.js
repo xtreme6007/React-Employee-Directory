@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import EmployeeCard from './components/EmployeeCard'
+import React from 'react';
+import EmployeeList from './components/EmployeeList'
 import './App.css';
 
+
+
 function App() {
+  
+  
+
   return (
     <div>
+      <EmployeeList 
+      /> 
       
     </div>
   );
-}
+
+};
 
 export default App;
