@@ -4,6 +4,7 @@ import API from '../API'
 import Search from '../Search'
 import SortButton from '../SortButton'
 import Table from 'react-bootstrap/Table'
+import "./style.css"
 
 
 
@@ -60,6 +61,8 @@ class EmployeeList extends Component {
 
     }
 
+   
+
 
 
 
@@ -68,9 +71,12 @@ class EmployeeList extends Component {
 
 
             <div>
+                <div>
                 <SortButton SortResults={this.SortResults} />
                 <Search handleSearchChange={this.filterResults} />
-            <Table striped bordered hover variant="dark" size="sm" responsive="md">
+                </div>
+                <div className="TableContainer">
+            <Table striped bordered hover variant="dark" size="sm" responsive className="table">
                 <thead>
                 <tr>
                     <th>Profile Pic</th>
@@ -120,10 +126,12 @@ class EmployeeList extends Component {
                     })
                 ) : (
                         <h1>No results to display</h1>
+                        
                     )
                 }
                 </tbody>
                 </Table>
+                </div>
             </div>
 
 
