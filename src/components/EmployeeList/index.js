@@ -2,6 +2,9 @@ import React, { Component } from "react"
 import EmployeeCard from "../EmployeeCard"
 import API from '../API'
 import Search from '../Search'
+import SortButton from '../SortButton'
+import Table from 'react-bootstrap/Table'
+
 
 
 
@@ -9,8 +12,9 @@ class EmployeeList extends Component {
     state = {
         result: [],
         filteredResults: [],
-        query: ""
-        
+        query: "",
+        sorted: false
+
     };
 
     componentDidMount() {
@@ -21,26 +25,38 @@ class EmployeeList extends Component {
                 filteredResults: res.data.results
             });
         })
-        
+
     }
-    
+
     filterResults = event => {
         console.log(this);
         console.log(this.state);
-            const filtered = this.state.result.filter(item => {
+        const filtered = this.state.result.filter(item => {
 
-                if(item.name.first === event.target.value){
+            if (item.name.first === event.target.value) {
 
-                    return true
-                }
-                return false
+                return true
+            }
+            return false
+               
+            
+            
+
+        })
+        this.setState({
+            filteredResults: filtered
+
+        })
+
+    }
+
+    SortResults = () => {
+        if (this.state.sorted === false) {
+            this.state.result.results.first.sort((a, b) => { return a - b });
 
 
-            })
-                this.setState({
-                    filteredResults: filtered
+        }
 
-                })
 
     }
 
@@ -52,29 +68,62 @@ class EmployeeList extends Component {
 
 
             <div>
-                    <Search handleSearchChange={this.filterResults}/>
+                <SortButton SortResults={this.SortResults} />
+                <Search handleSearchChange={this.filterResults} />
+            <Table striped bordered hover variant="dark" size="sm" responsive="md">
+                <thead>
+                <tr>
+                    <th>Profile Pic</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>email</th>
 
+
+                </tr>
+
+                </thead>
+                <tbody>
                 {this.state.filteredResults.length !== 0 ? (
 
                     this.state.filteredResults.map(emp => {
 
                         console.log(emp)
-                        return <EmployeeCard
-                            firstName={emp.name.first}
-                            lastName={emp.name.last}
-                            phone={emp.phone}
-                            email={emp.email}
-                            img={emp.picture.thumbnail}
+                        return (
+                            
+                                <tr>
+                                    <td data-th="Profile-Picture">
+                                        <img
+                                        src ={emp.picture.thumbnail}
+                                        alt ="user profile"
+                                    />
+                                    </td>
+                                    <td data-th="Name" className="align-middle">
+                                        {emp.name.first} {emp.name.last}
+                                    </td>
+                                    <td data-th="Phone" className="align-middle">
+                                        {emp.phone}
+                                    </td>
+                                    <td data-th="email" className="align-middle">
+                                        {emp.email}
+                                    </td>
+                                {/* <EmployeeCard
+                                    firstName={emp.name.first}
+                                    lastName={emp.name.last}
+                                    phone={emp.phone}
+                                    email={emp.email}
+                                    image={emp.picture.thumbnail}
+                                    /> */}
+                                </tr>
 
-
-
-
-                        />
+                           
+                        )
                     })
                 ) : (
                         <h1>No results to display</h1>
                     )
                 }
+                </tbody>
+                </Table>
             </div>
 
 
