@@ -56,7 +56,8 @@ class EmployeeList extends Component {
         if (this.state.sorted === false) {
             this.setState({
                 sorted: true,
-                filteredResults: this.state.result.sort()
+                filteredResults: this.state.result.sort((a, b) => a.name.first.localeCompare(b.name.first))
+                
             })
            /* this.state.result.results.first.sort()*/
             
@@ -102,7 +103,7 @@ class EmployeeList extends Component {
                         console.log(emp)
                         return (
                             
-                                <tr>
+                                <tr key={emp.id.value}>
                                     <td data-th="Profile-Picture">
                                         <img
                                         src ={emp.picture.thumbnail}
