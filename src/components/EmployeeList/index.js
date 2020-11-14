@@ -13,6 +13,7 @@ class EmployeeList extends Component {
     state = {
         result: [],
         filteredResults: [],
+        
         query: "",
         sorted: false
 
@@ -53,7 +54,12 @@ class EmployeeList extends Component {
 
     SortResults = () => {
         if (this.state.sorted === false) {
-            this.state.result.results.first.sort((a, b) => { return a - b });
+            this.setState({
+                sorted: true,
+                filteredResults: this.state.result.sort()
+            })
+           /* this.state.result.results.first.sort()*/
+            
 
 
         }
